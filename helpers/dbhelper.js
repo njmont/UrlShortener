@@ -32,7 +32,7 @@ let helper = {
                 })
 
             } else {
-                helper.createDoc(db, urls, url, 0, res, HOST);
+                helper.createDoc(db, urls, url, 0, res);
                 throw count_err;
                 db.close();
                 res.json(count_err)
