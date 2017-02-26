@@ -25,8 +25,7 @@ let helper = {
                     } else  {
                         //IF FOUND - Return the record
                         res.json(docs[0]);
-                        if (find_err)
-                            throw find_err;
+                        if (find_err) throw find_err;
                         db.close();
                     }
                 })
