@@ -1,10 +1,10 @@
 "use strict";
-const HOST = process.env.HOST || "http://localhost:8080";
+
 let helper = {
     insertOrFind: (db, url, res) => {
         let urls = db.collection('urls');
         //get the number of records to use as the ID.
-        urls.count((count_err, id) => {
+        urls.count((count_err, id, HOST) => {
             if (id) {
                 //Attempt to find the url by the original_url field
                 urls.find({
@@ -17,7 +17,7 @@ let helper = {
                     if (docs && docs.length === 0) {
                         //IF NOT FOUND - Add a new record
                         //Id is the length of the array of records
-                        helper.createDoc(db, urls, url, id, res);
+                        helper.createDoc(db, urls, url, id, res, HOST);
                     } else if (!docs) {
                       console.log("hello")
                       //IF NOT FOUND - Add a new record
@@ -32,14 +32,14 @@ let helper = {
                 })
 
             } else {
-                helper.createDoc(db, urls, url, id, res);
+                helper.createDoc(db, urls, url, id, res, HOST);
                 throw count_err;
                 db.close();
                 res.json(count_err)
             }
         })
     },
-    createDoc: (db, urls, url, id, res) => {
+    createDoc: (db, urls, url, id, res, HOST) => {
       let new_doc = {
           original_url: url,
           short_url: `${HOST}/${id}`,

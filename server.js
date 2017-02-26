@@ -5,7 +5,7 @@ var app = express();
 const mongo = require('mongodb').MongoClient;
 const DBHelper = require("./helpers/dbhelper.js").DBHelper;
 const DBHost = process.env.DBHost ||"mongodb://localhost:27017/learnyoumongo";
-
+const HOST = process.env.HOST || "http://localhost:8080";
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
@@ -32,7 +32,7 @@ app.get("/new/*", (req, res, next) => {
     if (url.match(/^(http\:\/\/|https\:\/\/)(\w|.)+$/)) {
         mongo.connect(DBHost, (err, db) => {
             if (db, res) {
-                DBHelper.insertOrFind(db, url, res);
+                DBHelper.insertOrFind(db, url, res, HOST);
             }
             if (err) {
                 response.err = err;
