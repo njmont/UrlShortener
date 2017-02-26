@@ -52,12 +52,9 @@ app.get("/shortened", (req, res, next) => {
       short_url: 1,
       _id: 0
     }).toArray((find_err, docs) => {
-
-      if (find_err) {
-        throw find_err;
-        res.json({error: "There are no shortened urls right now"});
-      }
-      if (docs) res.json(docs);
+      if (find_err) throw find_err;
+      if (docs && docs.length > 0) res.json(docs);
+      if (docs) res.json({error: "There are no shortened urls right now"});
     })
   })
 })
