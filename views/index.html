@@ -9,7 +9,7 @@
 
 <body>
     <div class="padding main-div">
-        <h1>Url Shortener Microservice</h1>
+        <h1>Url Shortener Microservice (aka Shrt-It)</h1>
         <div class="inset-div">
             <p>
                 <strong>
@@ -38,7 +38,7 @@
           </strong>
         </p>
 <pre>
-<a href="Insert link here"></a>
+<a href="https://shrt-it.herokuapp.com/new/http://www.google.com">https://shrt-it.herokuapp.com/new/http://www.google.com</a>
 </pre>
         <p>
           <strong>
@@ -46,10 +46,10 @@
           </strong>
         </p>
 <pre>
-{
-  original_url: <a href="https://thecoderlist.herokuapp.com">"https://thecoderlist.herokuapp.com"</a>,
-  short_url: "<%= process.env.HOST || "http://localhost:8080" %>/8"
-}
+  {
+  original_url: "http://www.google.com",
+  short_url: <a href="https://shrt-it.herokuapp.com/1">"https://shrt-it.herokuapp.com/1"</a>
+  }
 </pre>
     </div>
 </body>
