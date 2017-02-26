@@ -44,6 +44,24 @@ app.get("/new/*", (req, res, next) => {
     }
 })
 
+app.get("/shortened", (req, res, next) => {
+  mongo.connect(DBHost, (err, db) => {
+    let urls = db.collection('urls');
+    urls.find({}, {
+      original_url: 1,
+      short_url: 1,
+      _id: 0
+    }).toArray((find_err, docs) => {
+
+      if (find_err) {
+        throw find_err;
+        res.json({error: "There are no shortened urls right now"});
+      }
+      if (docs) res.json(docs);
+    })
+  })
+})
+
 /* GET create new shortened url. */
 app.get("/:url_id", (req, res, next) => {
     mongo.connect(DBHost, (err, db) => {
